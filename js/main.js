@@ -208,14 +208,14 @@ $('#qMail').addEventListener('click',e=>{ e.preventDefault(); location.href=`mai
 /* SOUND — warm lo-fi piano bed, generated live with WebAudio (no audio files).
    Am7 → Fmaj7 → Cmaj7 → Gadd9 pads + soft bass + a sparse pentatonic melody
    through a feedback delay. Slow, cosy, bakery-evening feel. */
-let actx=null, on=false, musicTimers=[];
+let actx=null, on=false, musicTimers=[], musicMaster=null;
 function tone(f,t,d,{type='sine',g=.04,attack=.01,partial=0,dest=null}={}){ const o=actx.createOscillator(), gn=actx.createGain();
   o.type=type; o.frequency.value=f; const s=actx.currentTime+t;
   gn.gain.setValueAtTime(0,s); gn.gain.linearRampToValueAtTime(g,s+attack);
   gn.gain.exponentialRampToValueAtTime(.0001,s+d);
   o.connect(gn).connect(dest||actx.destination); o.start(s); o.stop(s+d+.1);
   if(partial) tone(f*2,t,d*.6,{type:'sine',g:g*partial,attack,dest}); }
-function startMusic(){ const master=actx.createGain(); master.gain.value=.55;
+function startMusic(){ if(musicMaster) return; const master=actx.createGain(); master.gain.value=.55; musicMaster=master;
   const comp=actx.createDynamicsCompressor(); master.connect(comp); comp.connect(actx.destination);
   const delay=actx.createDelay(1); delay.delayTime.value=.42;
   const fb=actx.createGain(); fb.gain.value=.34; const wet=actx.createGain(); wet.gain.value=.3;
@@ -233,11 +233,24 @@ function startMusic(){ const master=actx.createGain(); master.gain.value=.55;
     tone(scale[mi],0,1.9,{type:'sine',g:.02,attack:.005,dest:master});
     musicTimers.push(setTimeout(playMelody,700+Math.random()*1100)); };
   playChord(); musicTimers.push(setTimeout(playMelody,900)); }
-$('#snd').addEventListener('click',function(){ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
-  if(actx.state==='suspended') actx.resume();
-  on=!on; this.classList.toggle('on',on); this.setAttribute('aria-pressed',on);
+const sndBtn=$('#snd');
+function setSound(want){ on=want; sndBtn.classList.toggle('on',on); sndBtn.setAttribute('aria-pressed',on);
   localStorage.setItem('billie-sound',on?'1':'0');
-  if(on) startMusic(); else { musicTimers.forEach(clearTimeout); musicTimers=[]; } });
+  if(on){ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
+    if(actx.state==='suspended') actx.resume(); startMusic(); }
+  else { musicTimers.forEach(clearTimeout); musicTimers=[];
+    if(musicMaster){ const m=musicMaster; musicMaster=null;
+      m.gain.linearRampToValueAtTime(.0001,actx.currentTime+.4); setTimeout(()=>m.disconnect(),500); } } }
+sndBtn.addEventListener('click',()=>setSound(!on));
+/* Autoplay: browsers only unlock audio after a first gesture, so start the
+   moment the visitor first taps, clicks or presses a key — unless they
+   previously turned sound off. */
+if(localStorage.getItem('billie-sound')!=='0'){ const arm=()=>{ setSound(true); };
+  const tryNow=()=>{ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
+    if(actx.state==='running'){ arm(); } };
+  tryNow();
+  ['pointerdown','keydown','touchstart'].forEach(ev=>window.addEventListener(ev,function h(){ if(!on) arm();
+    if(on) ['pointerdown','keydown','touchstart'].forEach(e2=>window.removeEventListener(e2,h)); },{passive:true})); }
 
 /* Pause motion */
 let paused=false;

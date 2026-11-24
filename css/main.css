@@ -136,8 +136,9 @@ html.is-intro .bar{opacity:0}
 body.hero-active .hero-cursor{display:flex}
 .hero-cursor.is-link{width:3.1em;height:3.1em;background:transparent;border-color:var(--terra)}
 .hero-cursor.is-click{width:5.6em;height:5.6em;background:var(--terra)}
-body.on-hero .bar,body.on-hero .snd-wrap{opacity:0;pointer-events:none}
+body.on-hero .bar{opacity:0;pointer-events:none}
 .bar,.snd-wrap{transition:opacity .4s ease}
+.snd-wrap{z-index:96}
 @media(max-width:991px){
   .hero{margin:.4em;border-radius:1.1em;height:calc(100svh - .8em)}
   .hero-status{display:none}
