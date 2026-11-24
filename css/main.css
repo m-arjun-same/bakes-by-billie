@@ -52,10 +52,10 @@ html.is-intro .bar{opacity:0}
 
 /* SND — ref: fixed left 4em, glass ring, 4-bar EQ */
 .snd-wrap{position:fixed;left:4em;bottom:1.6em;z-index:48;display:flex;align-items:center;gap:.9em}
-.snd-note{border-left:1px solid var(--hairline);padding-left:.9em;color:var(--sand);font-size:1.15em}
-.snd{width:3.4em;height:3.4em;border-radius:50%;border:1px solid var(--hairline);background:rgba(20,14,10,.35);backdrop-filter:blur(6px);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.snd-note{border-left:1px solid var(--hairline);padding-left:.9em;color:var(--sand);font-size:1.15em;mix-blend-mode:difference}
+.snd{width:3.4em;height:3.4em;border-radius:50%;border:1px solid #16130F;background:#16130F;box-shadow:0 .4em 1.4em rgba(10,5,2,.45);cursor:pointer;display:flex;align-items:center;justify-content:center}
 .snd-eq{display:flex;gap:.28em;align-items:flex-end;height:1.2em}
-.snd-eq i{width:.22em;height:30%;background:var(--sand);border-radius:2px}
+.snd-eq i{width:.22em;height:30%;background:#F6F0E2;border-radius:2px}
 .snd.on .snd-eq i{animation:sndEq .85s ease-in-out infinite alternate}
 .snd.on .snd-eq i:nth-child(2){animation-delay:.13s}.snd.on .snd-eq i:nth-child(3){animation-delay:.26s}.snd.on .snd-eq i:nth-child(4){animation-delay:.39s}
 @keyframes sndEq{from{height:18%}to{height:95%}}
