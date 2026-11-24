@@ -205,18 +205,39 @@ $('#quoteClose').addEventListener('click',()=>{ quote.classList.remove('open'); 
 function qText(){ return encodeURIComponent(`Hi Billie! I'm ${$('#qName').value||'...'}. I'd love: ${$('#qType').value} for ${$('#qDate').value||'a date TBC'}. ${$('#qMsg').value||''}`); }
 $('#qMail').addEventListener('click',e=>{ e.preventDefault(); location.href=`mailto:billie.king@sky.com?subject=Bakes by Billie enquiry&body=${qText()}`; });
 
-/* SOUND — synthesised WebAudio (ref: generated buffers, one bed) */
-let actx=null, bed=null, on=false;
-function beep(f,t,d,type='sine',g=.018){ const o=actx.createOscillator(), gn=actx.createGain();
-  o.type=type; o.frequency.value=f; gn.gain.setValueAtTime(g,actx.currentTime+t);
-  gn.gain.exponentialRampToValueAtTime(.0001,actx.currentTime+t+d);
-  o.connect(gn).connect(actx.destination); o.start(actx.currentTime+t); o.stop(actx.currentTime+t+d); }
+/* SOUND — warm lo-fi piano bed, generated live with WebAudio (no audio files).
+   Am7 → Fmaj7 → Cmaj7 → Gadd9 pads + soft bass + a sparse pentatonic melody
+   through a feedback delay. Slow, cosy, bakery-evening feel. */
+let actx=null, on=false, musicTimers=[];
+function tone(f,t,d,{type='sine',g=.04,attack=.01,partial=0,dest=null}={}){ const o=actx.createOscillator(), gn=actx.createGain();
+  o.type=type; o.frequency.value=f; const s=actx.currentTime+t;
+  gn.gain.setValueAtTime(0,s); gn.gain.linearRampToValueAtTime(g,s+attack);
+  gn.gain.exponentialRampToValueAtTime(.0001,s+d);
+  o.connect(gn).connect(dest||actx.destination); o.start(s); o.stop(s+d+.1);
+  if(partial) tone(f*2,t,d*.6,{type:'sine',g:g*partial,attack,dest}); }
+function startMusic(){ const master=actx.createGain(); master.gain.value=.55;
+  const comp=actx.createDynamicsCompressor(); master.connect(comp); comp.connect(actx.destination);
+  const delay=actx.createDelay(1); delay.delayTime.value=.42;
+  const fb=actx.createGain(); fb.gain.value=.34; const wet=actx.createGain(); wet.gain.value=.3;
+  delay.connect(fb); fb.connect(delay); delay.connect(wet); wet.connect(master);
+  const chords=[[110,164.81,196,261.63],[87.31,130.81,164.81,220],[130.81,196,246.94,329.63],[98,146.83,220,246.94]];
+  const roots=[55,43.65,65.41,49];
+  const CH=4.4; let ci=0;
+  const playChord=()=>{ if(!on) return; const c=chords[ci%4];
+    c.forEach(f=>tone(f,0,CH+1.6,{type:'triangle',g:.011,attack:1.3,dest:master}));
+    tone(roots[ci%4],0,3.6,{type:'sine',g:.05,attack:.02,dest:master});
+    ci++; musicTimers.push(setTimeout(playChord,CH*1000)); };
+  const scale=[440,523.25,587.33,659.25,783.99,880]; let mi=2;
+  const playMelody=()=>{ if(!on) return; mi=Math.max(0,Math.min(scale.length-1,mi+(Math.random()<.5?-1:1)*(Math.random()<.3?2:1)));
+    if(Math.random()<.82) tone(scale[mi],0,1.9,{type:'sine',g:.032,attack:.005,partial:.35,dest:delay});
+    tone(scale[mi],0,1.9,{type:'sine',g:.02,attack:.005,dest:master});
+    musicTimers.push(setTimeout(playMelody,700+Math.random()*1100)); };
+  playChord(); musicTimers.push(setTimeout(playMelody,900)); }
 $('#snd').addEventListener('click',function(){ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
+  if(actx.state==='suspended') actx.resume();
   on=!on; this.classList.toggle('on',on); this.setAttribute('aria-pressed',on);
   localStorage.setItem('billie-sound',on?'1':'0');
-  if(on){ beep(660,0,.12,'triangle',.05); const notes=[523,659,784,1047,784,659];
-    const loop=()=>notes.forEach((f,i)=>beep(f,i*.22,.5)); loop(); bed=setInterval(loop,notes.length*220+2600);
-  } else clearInterval(bed); });
+  if(on) startMusic(); else { musicTimers.forEach(clearTimeout); musicTimers=[]; } });
 
 /* Pause motion */
 let paused=false;
