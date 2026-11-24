@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bakes by Billie — The Cake Coven | Homemade Cakes, Rosyth</title>
+<meta name="description" content="Bakes by Billie — The Cake Coven. Homemade custom cakes, cupcakes, cake pops and treat boxes from Rosyth, Scotland. Cake Sheds at 57 Wemyss Street and Adventure Golf Island.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧁</text></svg>">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-num" id="loaderNum">0</div>
+  <div class="loader-meta">
+    <span class="loader-pct" id="loaderPct">0%</span>
+    <span class="loader-bar"><i id="loaderBar"></i></span>
+    <span class="loader-word">BAKES BY BILLIE · THE CAKE COVEN</span>
+  </div>
+  <button class="loader-skip" id="loaderSkip" type="button">Skip</button>
+</div>
+
+<!-- PAGE TRANSITION ROWS -->
+<div id="trx" aria-hidden="true"></div>
+
+<!-- TOP BAR -->
+<header class="bar" id="bar">
+  <a class="bar-logo" href="#hero" data-scroll>BAKES<span>by</span>BILLIE</a>
+  <div class="bar-right">
+    <span class="bar-tag">THE CAKE COVEN · ROSYTH</span>
+    <button class="btn" id="quoteOpen" type="button"><span class="btn-in">Get a quote</span><span class="btn-bg"></span></button>
+  </div>
+</header>
+
+<!-- SOUND TOGGLE -->
+<button class="snd" id="snd" type="button" aria-pressed="false" aria-label="Toggle sound">
+  <span class="snd-eq"><i></i><i></i><i></i><i></i></span>
+</button>
+
+<!-- SHOT-CLOCK HUD -->
+<nav class="hud" id="hud" aria-label="Sections">
+  <div class="hud-clock" id="hudClock">00:24</div>
+  <div class="hud-name" id="hudName">TIP-OFF</div>
+  <ol class="hud-stops">
+    <li data-stop="hero" class="on">Tip-off</li>
+    <li data-stop="court">In the kitchen</li>
+    <li data-stop="tech">The bakes</li>
+    <li data-stop="iced">Iced for you</li>
+    <li data-stop="testimonials">Word from the Coven</li>
+    <li data-stop="finale">Get ready</li>
+    <li data-stop="foot">Final whistle</li>
+  </ol>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section id="hero" class="hero">
+    <div class="hero-media">
+      <img class="hero-img" id="heroImg" src="assets/img/hero.webp" alt="Chocolate drip celebration cake by Bakes by Billie">
+      <div class="hero-shade"></div>
+    </div>
+    <h1 class="hero-h1">
+      <span class="h1-line h1-a">Homemade</span>
+      <span class="h1-line h1-b">Cakes</span>
+      </h1>
+    <div class="hero-copy">
+      <span class="hero-brand">Bakes by Billie</span>
+      <p>Custom cakes, cupcakes, cake pops and treat boxes — baked at home in Rosyth, Scotland, by one pair of hands. Registered, insured, and five years in.</p>
+      <div class="hero-chips">
+        <span>CVN·01 CUSTOM S26</span><span>Rosyth · Fife</span><span>Est. 2020</span><span>Scroll to explore</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURT / KITCHEN JOURNEY -->
+  <section id="court" class="court">
+    <div class="court-stage">
+      <canvas id="journeyCanvas" width="1200" height="900" aria-label="A journey through Billie's bakes"></canvas>
+      <div class="helix" id="helix">
+        <figure class="hcard" style="--i:0"><img src="assets/img/hero.webp" alt="Chocolate drip cake"></figure>
+        <figure class="hcard" style="--i:1"><img src="assets/img/shed.webp" alt="The Cake Shed, 57 Wemyss Street"></figure>
+        <figure class="hcard" style="--i:2"><img src="assets/img/brownies.webp" alt="Brownie stack"></figure>
+        <figure class="hcard" style="--i:3"><img src="assets/img/murphy-poster.webp" alt="Murphy's Biscuit Club poster"></figure>
+        <figure class="hcard" style="--i:4"><img src="assets/img/cake-gold.webp" alt="Gold birthday cake"></figure>
+        <figure class="hcard" style="--i:5"><img src="assets/img/treatbox.webp" alt="Treat box"></figure>
+        <figure class="hcard" style="--i:6"><img src="assets/img/shed-in.webp" alt="Inside the Cake Shed"></figure>
+      </div>
+      <p class="court-caption">Trusted every celebration.</p>
+      <p class="court-sub">One home kitchen in Rosyth — every bake below is Billie's own, from her Instagram.</p>
+    </div>
+  </section>
+
+  <!-- TECH / THE BAKES -->
+  <section id="tech" class="tech">
+    <div class="tech-stage">
+      <h2 class="tech-h">One home baker. <em>Four ways to treat yourself.</em></h2>
+      <article class="tpanel" data-panel="0">
+        <img src="assets/img/cake-21.webp" alt="Custom celebration cake">
+        <div class="tpanel-in">
+          <span class="tp-no">01</span><h3>Custom Cakes</h3><p class="tp-claim">Your design, baked to order.</p>
+          <ul class="hudrows"><li><span>For</span><b>Birthdays · weddings · just because</b></li><li><span>Booking</span><b>Deposit secures your date</b></li><li><span>Status</span><b>November fully booked</b></li></ul>
+        </div>
+      </article>
+      <article class="tpanel" data-panel="1">
+        <img src="assets/img/cup.webp" alt="Cupcakes and bakes leaving the kitchen">
+        <div class="tpanel-in">
+          <span class="tp-no">02</span><h3>Cupcakes &amp; Cake Pops</h3><p class="tp-claim">Small bakes, big spells.</p>
+          <ul class="hudrows"><li><span>Cupcakes</span><b>Sprinkle &amp; seasonal</b></li><li><span>Cake pops</span><b>By the box</b></li><li><span>Orders</span><b>Message to book</b></li></ul>
+        </div>
+      </article>
+      <article class="tpanel" data-panel="2">
+        <img src="assets/img/postie.webp" alt="The Postie Box by Bakes by Billie">
+        <div class="tpanel-in">
+          <span class="tp-no">03</span><h3>Treat &amp; Postie Boxes</h3><p class="tp-claim">Sweet treats, delivered.</p>
+          <ul class="hudrows"><li><span>Postie Box</span><b>Back by popular demand</b></li><li><span>Inside</span><b>Brownies · cookies · blondies &amp; more</b></li><li><span>Sent</span><b>With love, from Rosyth</b></li></ul>
+        </div>
+      </article>
+      <article class="tpanel" data-panel="3">
+        <img src="assets/img/brownies.webp" alt="Cake Shed brownie stack">
+        <div class="tpanel-in">
+          <span class="tp-no">04</span><h3>Cake Shed Bakes</h3><p class="tp-claim">The honesty-box shed, stocked fresh.</p>
+          <ul class="hudrows"><li><span>Rosyth</span><b>57 Wemyss Street</b></li><li><span>Also at</span><b>Adventure Golf Island, Dunfermline</b></li><li><span>Hours</span><b>Sat &amp; Sun · 10am–8pm, or sell-out</b></li></ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ICED FOR YOU (TeamKnit equivalent) -->
+  <section id="iced" class="iced">
+    <div class="iced-stage">
+      <div class="iced-copy">
+        <h2>Now available with <em>your name on it…</em> iced.</h2>
+        <p>Type a name and watch it piped onto the cake — the way Billie finishes a custom order.</p>
+        <label class="iced-label" for="nameInput">Your name</label>
+        <input id="nameInput" type="text" maxlength="24" placeholder="e.g. Anthony Ward" autocomplete="off">
+        <p class="iced-note">The full name goes in; the initials stay… <span id="initialsOut">AW</span>, piped at the centre, never printed on.</p>
+      </div>
+      <canvas id="icedCanvas" width="1080" height="1080" aria-label="Cake with your name iced on it"></canvas>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS / WORD FROM THE COVEN -->
+  <section id="testimonials" class="ttl">
+    <h2 class="ttl-h">Word from the Coven.</h2>
+    <div class="ttl-grid">
+      <article class="ttl-card" data-lb="billie">
+        <img src="assets/img/billie.webp" alt="Billie, the baker">
+        <div class="ttl-hud"><span class="rec">● Rec</span><span class="tc" data-tc>00:00:00</span><span>Cam 01 · 9:16</span></div>
+        <h3>Billie — the baker</h3>
+        <p>One person behind the mixing bowl. The Cake Sheds return the weekend of 27 November after her Glasgow expo trip.</p>
+      </article>
+      <article class="ttl-card" data-lb="pass">
+        <img src="assets/img/billie-pass.webp" alt="Billie with her food hygiene pass certificate">
+        <div class="ttl-hud"><span class="rec">● Rec</span><span class="tc" data-tc>00:00:00</span><span>Cam 02 · 9:16</span></div>
+        <h3>Registered &amp; insured</h3>
+        <p>A fully registered, insured home baker — food hygiene certified, five years of Bakes by Billie and counting.</p>
+      </article>
+      <article class="ttl-card" data-lb="murphy">
+        <img src="assets/img/murphy.webp" alt="Murphy, president of the Biscuit Club">
+        <div class="ttl-hud"><span class="rec">● Rec</span><span class="tc" data-tc>00:00:00</span><span>Cam 03 · 9:16</span></div>
+        <h3>Murphy's Biscuit Club</h3>
+        <p>Bring your human to the Rosyth shed, buy a slice, cake or cupcake — and your dog gets a free homemade biscuit. Water bowl always out.</p>
+      </article>
+    </div>
+    <p class="ttl-quote">“Dunfermline's worst-kept secret cult.” — the Cake Coven, on itself</p>
+  </section>
+
+  <!-- FINALE -->
+  <section id="finale" class="finale">
+    <div class="finale-stage">
+      <h2 class="finale-h">Christmas at the Cake Coven — <em>get ready.</em></h2>
+      <div class="bag bag-a"><img src="assets/img/postie.webp" alt="Postie Box"></div>
+      <div class="bag bag-b"><img src="assets/img/treatbox.webp" alt="Treat box"></div>
+      <div class="finale-card">
+        <ul class="hudrows light">
+          <li><span>Christmas Eve Box</span><b>£22</b></li>
+          <li><span>Yule Log</span><b>Half £28 · Full £36</b></li>
+          <li><span>Mini Cheesecakes</span><b>£5 each</b></li>
+          <li><span>Orders close</span><b>20 December</b></li>
+          <li><span>Collection</span><b>23 December</b></li>
+        </ul>
+        <a class="btn big" href="order.html"><span class="btn-in">Order the box</span><span class="btn-bg"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DUSK -->
+  <section id="dusk" class="dusk" aria-hidden="true"><div class="dusk-sun"></div></section>
+</main>
+
+<!-- FOOTER -->
+<footer id="foot" class="foot">
+  <img class="foot-bg" src="assets/img/shed.webp" alt="">
+  <div class="foot-in">
+    <p class="foot-tag">Proven, not promised.</p>
+    <p class="foot-line">Baked with love in Rosyth, Scotland — Bakes by Billie · The Cake Coven</p>
+    <p class="foot-line">Cake Shed: 57 Wemyss Street, Rosyth · Adventure Golf Island, Dunfermline</p>
+    <nav class="foot-links">
+      <a href="faq.html">FAQ</a><a href="order.html">Order</a>
+      <a href="https://www.instagram.com/bakes_bybillie" target="_blank" rel="noopener">Instagram @bakes_bybillie</a>
+      <a href="mailto:billie.king@sky.com">Get in touch →</a>
+    </nav>
+    <p class="foot-small">© 2026 Bakes by Billie · 397 followers and one very good dog · <button type="button" id="pauseMotion" class="foot-pause">Pause motion</button></p>
+  </div>
+</footer>
+
+<!-- QUOTE DRAWER -->
+<aside class="quote" id="quote" aria-hidden="true">
+  <button class="quote-x" id="quoteClose" type="button" aria-label="Close">×</button>
+  <h2>Get a quote</h2>
+  <p>Tell Billie what you're dreaming of. Custom cake prices are confirmed by Billie on enquiry — no baked-in price list.</p>
+  <label>Your name <input id="qName" type="text"></label>
+  <label>What do you need?
+    <select id="qType"><option>Custom cake</option><option>Cupcakes</option><option>Cake pops</option><option>Treat box</option><option>Postie Box</option><option>Christmas order</option></select></label>
+  <label>Date needed <input id="qDate" type="date"></label>
+  <label>Details <textarea id="qMsg" rows="4" placeholder="Flavours, size, names to ice…"></textarea></label>
+  <a class="btn big" id="qSend" href="https://www.instagram.com/bakes_bybillie" target="_blank" rel="noopener"><span class="btn-in">Send via Instagram</span><span class="btn-bg"></span></a>
+  <a class="quote-mail" id="qMail" href="mailto:billie.king@sky.com">or email billie.king@sky.com</a>
+</aside>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb" aria-hidden="true">
+  <button class="lb-x" id="lbClose" type="button" aria-label="Close">×</button>
+  <img id="lbImg" src="" alt="">
+  <p class="lb-cap" id="lbCap"></p>
+  <p class="lb-time" id="lbTime">00:00 / 00:00</p>
+</div>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

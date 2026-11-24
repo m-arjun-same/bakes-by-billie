@@ -1,0 +1,23 @@
+.kit-body{background:#17130F}
+.bar.static{position:relative}
+.kit{display:grid;grid-template-columns:58% 42%;min-height:100vh}
+.kit-stage{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2em;background:var(--scene-bg)}
+#kitCanvas{width:min(32em,86%);aspect-ratio:1;border-radius:1em;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.kit-stage-note{font-family:'Caveat',cursive;font-size:1.7em;color:var(--terra)}
+.kit-panel{background:#17130F;padding:3em 2.6em 4em;overflow-y:auto}
+.kit-panel h1{font-size:3em}
+.kit-sub{font-weight:300;line-height:1.5;margin:.8em 0 1.6em}
+.kit-panel details{border-top:1px solid var(--hairline);padding:1.1em 0}
+.kit-panel summary{font-family:'FK Screamer',Impact,sans-serif;text-transform:uppercase;font-size:1.25em;cursor:pointer;list-style:none}
+.kit-panel summary .opt{font-family:'Geist Mono',monospace;font-size:.65em;color:var(--taupe);text-transform:none}
+.opts{display:flex;flex-wrap:wrap;gap:.55em;margin-top:1em}
+.opts button{border:1px solid var(--hairline);background:transparent;color:var(--sand);border-radius:999px;padding:.6em 1.15em;font-family:'Geist',sans-serif;font-size:.95em;cursor:pointer}
+.opts button.on{background:var(--terra);border-color:var(--terra);color:#fff}
+.kit-panel input[type=text],.kit-panel input[type=date]{width:100%;margin-top:1em;background:transparent;border:none;border-bottom:2px dashed var(--hairline);color:var(--sand);font-size:1.3em;padding:.35em 0;outline:none;font-family:'Geist',sans-serif}
+.kit-panel input:focus{border-color:var(--terra)}
+.kit-note{color:var(--taupe);font-weight:300;font-size:.95em;margin-top:1em;line-height:1.5}
+.kit-summary{border:1px solid var(--hairline);border-radius:1em;padding:1.4em 1.6em;margin:1.8em 0;font-family:'Geist Mono',monospace;font-size:.88em;line-height:1.9;white-space:pre-line}
+.kit-panel .btn{border-color:var(--sand)}
+.kit-ig{display:block;margin-top:1.1em;color:var(--terra)}
+@media(max-width:991px){.kit{grid-template-columns:52% 48%}}
+@media(max-width:767px){.kit{grid-template-columns:1fr}.kit-stage{position:relative;height:44vh}.kit-panel{padding:2em 1.4em 3em}}
