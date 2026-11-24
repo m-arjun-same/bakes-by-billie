@@ -59,28 +59,69 @@
 </nav>
 
 <main>
-  <!-- HERO (reference: .hero 100svh, --h1-top 18.2%, --cluster-top 41.9%,
-       media / player-glow / seam / copy / main / headline / cta-row / slogan / prod-card) -->
-  <section class="hero hero--h1a hero--h1b hero--h1c" id="hero">
-    <div class="hero__media">
-      <img class="hero-img" id="heroImg" src="assets/img/hero.webp" alt="Chocolate drip celebration cake by Bakes by Billie">
-      <div class="hero__player-glow"></div>
-      <div class="hero__seam"></div>
-    </div>
-    <div class="hero__main">
-      <h1 class="hero-h1" aria-label="Homemade Cakes">
-        <span class="h1-t h1-a" aria-hidden="true">Homemade Cakes</span>
-        <span class="h1-t h1-b" aria-hidden="true">Homemade Cakes</span>
-      </h1>
-      <p class="hero__headline">Engineered for the celebration</p>
-    </div>
-    <div class="hero__copy">
-      <p class="hero__para">Bakes by Billie™ — custom cakes, cupcakes, cake pops and treat boxes, baked at home in Rosyth. Tested at real celebrations. Proven with love, not adjectives.</p>
-      <div class="hero__cta-row">
-        <a class="btn" href="order.html"><span class="btn-in">Order the bake</span><span class="btn-bg"></span></a>
-        <a class="hero__learn" href="#court" data-scroll>See the kitchen ↓</a>
+  <!-- HERO — Elias Monroe template (Buddy, 2026-11-24): cream sheet, giant two-line
+       name + lens cursor, centre portrait cutout, latest-bake card, letter card -->
+  <section class="hero" id="hero">
+    <p class="hero-status"><i></i> Now baking · Christmas orders open</p>
+    <nav class="hero-nav" aria-label="Hero">
+      <a href="#hero" data-scroll class="hn-on"><i></i>Home</a>
+      <a href="#team" data-scroll>About</a>
+      <a class="hn-logo" href="#hero" data-scroll>Billie</a>
+      <a href="#tech" data-scroll>Bakes</a>
+      <a href="#court" data-scroll>The Shed</a>
+    </nav>
+    <button class="hero-contact" id="heroContact" type="button">Contact <span>↗</span></button>
+
+    <div class="hero-name" id="heroName" aria-label="Bakes Billie">
+      <div class="name-base">
+        <span class="nl nl-1">Bakes</span>
+        <span class="nl nl-2">Billie</span>
+      </div>
+      <div class="name-alt" aria-hidden="true">
+        <span class="nl nl-1">Bakes</span>
+        <span class="nl nl-2">Billie</span>
       </div>
     </div>
+    <img class="hero-portrait" src="assets/img/billie-cutout.png" alt="Billie, the baker behind Bakes by Billie">
+
+    <div class="hero-left">
+      <p class="hero-role">Home baker <i>/</i> Cake artist <i>/</i> Rosyth</p>
+      <h2 class="hero-head">Cakes and bakes<br>for a more delicious<br>tomorrow.</h2>
+      <span class="hero-rule"></span>
+      <p class="hero-para">I bake custom cakes, cupcakes and treat boxes from my home kitchen in Rosyth — and stock the little Cake Shed on Wemyss Street.</p>
+    </div>
+    <p class="hero-socials"><a href="https://www.instagram.com/bakes_bybillie" target="_blank" rel="noopener">Instagram</a> <i>/</i> <a href="https://www.facebook.com/bakes_bybillie" target="_blank" rel="noopener">Facebook</a></p>
+
+    <div class="hero-bake" id="heroBake">
+      <div class="bake-card" id="bakeCard">
+        <div class="bake-cover"><img id="bakeImg" src="assets/img/postie.webp" alt="The Postie Box"></div>
+        <p class="bake-cover-title" id="bakeCoverTitle">The<br>Postie<br>Box</p>
+      </div>
+      <div class="bake-meta">
+        <span class="bake-label" id="bakeLabel">The Latest Bake</span>
+        <span class="bake-cats" id="bakeCats">Boxes / Post / Sweet</span>
+        <button class="bake-next" id="bakeNext" type="button" aria-label="Next bake">↗</button>
+      </div>
+    </div>
+
+    <div class="hero-letter" id="heroLetter">
+      <div class="letter-paper" id="letterPaper">
+        <div class="letter-top">
+          <span>A letter to tomorrow</span>
+          <button class="letter-seal" id="letterSeal" type="button">Seal &amp;<br>Send</button>
+        </div>
+        <p class="letter-body"><span class="letter-dear">Dear tomorrow,</span><br><span id="letterText"></span><span class="letter-caret"></span></p>
+        <p class="letter-count" id="letterCount">Letter 01 / 04</p>
+      </div>
+      <div class="letter-env" id="letterEnv" aria-hidden="true">
+        <p class="env-note" id="envNote">Sealed for tomorrow · Sat 10am</p>
+        <div class="envelope">
+          <span class="env-postmark">Tomorrow<br>Sat · 10am</span>
+          <span class="env-wax">B</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-cursor" id="heroCursor"><span id="heroCursorTxt"></span></div>
   </section>
 
   <!-- COURT (reference: .court --court-len 200vh, track / vignette / lantern / caption) -->

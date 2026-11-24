@@ -73,28 +73,87 @@ html.is-intro .bar{opacity:0}
 .hud-stops{display:none}
 @media(max-width:991px){.hud{display:none}}
 
-/* HERO — reference geometry: 1-line giant H1 full width at --h1-top 18.2%,
-   accent Screamer headline under it, small dim paragraph, minimal CTA row */
-.hero{position:relative;height:100vh;height:100svh;overflow:hidden;background:var(--scene-bg);color:var(--white);--h1-top:18.2%}
-.hero__media{position:absolute;inset:0;overflow:hidden;background:var(--scene-bg)}
-.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.88}
-.hero__player-glow{position:absolute;inset:0;background:radial-gradient(42% 52% at 66.3% 39.7%,rgba(255,120,180,.28),transparent 70%)}
-.hero__seam{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,10,8,.28),transparent 38%,rgba(11,10,8,.8))}
-.hero__main{position:absolute;inset:0;z-index:5}
-.hero-h1{position:absolute;left:3rem;top:var(--h1-top);font-size:9.4em;line-height:.92;white-space:nowrap}
-.h1-t{display:block;position:absolute;left:0;top:0;white-space:nowrap}
-.h1-t:first-child{position:relative}
-.h1-a{color:#fff;mix-blend-mode:overlay;opacity:.55}
-.h1-b{background:linear-gradient(100deg,#7d7a6e 0%,#a8a294 26%,#f6e7c3 55%,#fff3d0 70%,#e9dab2 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero__headline{position:absolute;left:3rem;top:calc(var(--h1-top) + 10.4rem);font-family:'FK Screamer',Impact,sans-serif;text-transform:uppercase;font-size:3.1em;line-height:.95;color:var(--terra)}
-.hero__copy{position:absolute;left:3rem;top:calc(var(--h1-top) + 15.6rem);z-index:7;max-width:27em}
-.hero__para{font-size:1.08em;line-height:1.55;font-weight:300;color:var(--white-dim)}
-.hero__cta-row{display:flex;align-items:center;gap:1.8em;margin-top:1.7em}
-.hero__learn{font-family:'Geist Mono',monospace;font-size:.8em;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid var(--terra);padding-bottom:.3em}
-@media(max-width:767px){
-  .hero-h1{left:1.4rem;font-size:4.6em}
-  .hero__headline{left:1.4rem;font-size:1.9em;top:calc(var(--h1-top) + 6.4em)}
-  .hero__copy{left:1.4rem;right:1.4rem;top:auto;bottom:9em}
+/* HERO — Elias Monroe template: cream sheet, Archivo Black two-line name,
+   portrait cutout over the type, latest-bake card, letter-to-tomorrow card, lens cursor */
+@font-face{font-family:'Archivo Black';src:url('../assets/fonts/ArchivoBlack.ttf') format('truetype');font-weight:400}
+.hero{position:relative;height:calc(100vh - 1.4em);height:calc(100svh - 1.4em);margin:.7em;border-radius:1.6em;overflow:hidden;background:#F5F1EA;color:#16130F;cursor:none}
+.hero a,.hero button{cursor:none}
+.hero-status{position:absolute;top:2.1em;left:3em;font-family:'Geist Mono',monospace;font-size:.78em;letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:.7em;z-index:8}
+.hero-status i{width:.55em;height:.55em;border-radius:50%;background:var(--terra);display:block}
+.hero-nav{position:absolute;top:1.6em;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:3.2em;z-index:8}
+.hero-nav a{text-decoration:none;font-size:.98em;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#16130F;display:flex;align-items:center;gap:.6em}
+.hero-nav a i{width:.5em;height:.5em;border-radius:50%;background:var(--terra);display:none}
+.hero-nav a.hn-on{color:var(--terra)}
+.hero-nav a.hn-on i{display:block}
+.hero-nav .hn-logo{font-family:'FK Screamer',Impact,sans-serif;font-size:1.9em;color:var(--terra);letter-spacing:.01em}
+.hero-contact{position:absolute;top:1.5em;right:2.6em;z-index:8;background:transparent;border:1px solid rgba(22,19,15,.45);border-radius:999px;padding:.55em .6em .55em 1.5em;font-family:'Geist',sans-serif;font-size:.95em;font-weight:600;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:1em;color:#16130F}
+.hero-contact span{background:var(--terra);color:#fff;width:2.1em;height:2.1em;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:1em}
+.hero-name{position:absolute;inset:0;z-index:2}
+.nl{position:absolute;font-family:'Archivo Black',sans-serif;text-transform:uppercase;line-height:.96;white-space:nowrap}
+.nl-1{left:.18em;top:.62em;font-size:14.2em;color:var(--terra)}
+.nl-2{left:1.52em;top:1.86em;font-size:14.2em;color:#16130F}
+.name-alt{position:absolute;inset:0;clip-path:circle(0px at -200px -200px)}
+.name-alt .nl-1{color:#fff;-webkit-text-stroke:3px var(--terra)}
+.name-alt .nl-2{color:#fff;-webkit-text-stroke:3px #16130F}
+.hero-portrait{position:absolute;left:50%;bottom:0;transform:translateX(-56%);height:64%;z-index:3;pointer-events:none;filter:drop-shadow(0 18px 30px rgba(22,19,15,.25))}
+.hero-left{position:absolute;left:3em;top:47%;z-index:4;max-width:19.5em}
+.hero-role{font-family:'Geist Mono',monospace;font-size:.74em;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+.hero-role i{color:var(--terra);font-style:normal;margin:0 .3em}
+.hero-head{font-family:'Geist',sans-serif;font-weight:600;text-transform:none;font-size:2.05em;line-height:1.18;letter-spacing:-.01em;margin-top:1em}
+.hero-rule{display:block;width:3.4em;height:.22em;background:var(--terra);margin:1.5em 0}
+.hero-para{color:#7A7264;font-weight:300;line-height:1.65;font-size:1.04em;max-width:19em}
+.hero-socials{position:absolute;left:3em;bottom:2.6em;z-index:4;font-size:1em}
+.hero-socials a{text-decoration:none;color:#16130F}
+.hero-socials i{color:var(--terra);font-style:normal;margin:0 .35em}
+.hero-bake{position:absolute;right:3em;top:12.5%;z-index:4;width:26em}
+.bake-card{position:relative;background:#EFE9DF;border-radius:1em;height:15.5em;overflow:hidden;perspective:800px}
+.bake-cover{position:absolute;top:8%;right:9%;height:84%;aspect-ratio:.78;border-radius:.3em;overflow:hidden;box-shadow:0 14px 28px rgba(22,19,15,.28);transform-origin:left center}
+.bake-cover img{width:100%;height:100%;object-fit:cover}
+.bake-cover-title{position:absolute;left:1.1em;top:1em;font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:1.25em;line-height:1.12;color:#16130F;max-width:6em}
+.bake-meta{display:flex;align-items:center;gap:1em;margin-top:1em}
+.bake-label{font-weight:600;font-size:1.02em}
+.bake-cats{margin-left:auto;color:#7A7264;font-size:.95em}
+.bake-next{background:var(--terra);color:#fff;border:none;width:2.2em;height:2.2em;border-radius:50%;font-size:1em;flex:0 0 auto}
+.hero-letter{position:absolute;right:3em;bottom:2.4em;z-index:4;width:29em}
+.letter-paper{background:#FCFBF8;border-radius:.7em;box-shadow:0 24px 44px rgba(22,19,15,.13);padding:1.9em 2.1em 1.6em;transform:rotate(-1.1deg)}
+.letter-top{display:flex;justify-content:space-between;align-items:flex-start}
+.letter-top>span{font-family:'Geist Mono',monospace;font-size:.76em;letter-spacing:.22em;text-transform:uppercase;color:#7A7264}
+.letter-seal{background:none;border:1.5px solid rgba(255,62,138,.55);color:rgba(255,62,138,.75);border-radius:50%;width:5.4em;height:5.4em;font-family:'Geist Mono',monospace;font-size:.62em;letter-spacing:.14em;text-transform:uppercase;transform:rotate(11deg);line-height:1.5;flex:0 0 auto;margin-top:-.6em}
+.letter-seal:hover{background:var(--terra);color:#fff;border-color:var(--terra)}
+.letter-body{margin-top:1.1em;font-size:1.28em;line-height:1.5;min-height:4.4em;font-weight:400}
+.letter-dear{font-weight:500}
+.letter-caret{display:inline-block;width:.55em;height:1.05em;background:var(--terra);vertical-align:-.15em;margin-left:.15em;animation:caretBlink 1s steps(1) infinite}
+@keyframes caretBlink{50%{opacity:0}}
+.letter-count{margin-top:1.2em;font-family:'Geist Mono',monospace;font-size:.74em;letter-spacing:.22em;text-transform:uppercase;color:#7A7264}
+.letter-env{display:none;text-align:left}
+.letter-env.show{display:block}
+.env-note{font-family:'Geist Mono',monospace;font-size:.76em;letter-spacing:.22em;text-transform:uppercase;color:#7A7264;margin-bottom:1em}
+.envelope{position:relative;height:12.5em;background:linear-gradient(160deg,#F1EAD9,#E7DCC4);border-radius:.5em;box-shadow:0 24px 44px rgba(22,19,15,.15);overflow:hidden}
+.envelope::before{content:'';position:absolute;inset:0;background:linear-gradient(205deg,transparent 49.4%,rgba(22,19,15,.14) 50%,transparent 50.6%),linear-gradient(-205deg,transparent 49.4%,rgba(22,19,15,.14) 50%,transparent 50.6%),linear-gradient(180deg,#EFE6D2 0 46%,transparent 46.5%)}
+.env-wax{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:3.2em;height:3.2em;border-radius:50%;background:var(--terra);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'FK Screamer',Impact,sans-serif;font-size:1.3em;box-shadow:0 6px 14px rgba(22,19,15,.25);z-index:2}
+.env-postmark{position:absolute;right:1.4em;bottom:1.2em;border:1.5px solid rgba(255,62,138,.6);color:rgba(255,62,138,.75);border-radius:50%;width:6.4em;height:6.4em;display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Geist Mono',monospace;font-size:.6em;letter-spacing:.12em;text-transform:uppercase;transform:rotate(-11deg);line-height:1.6;z-index:2}
+.hero-cursor{position:fixed;z-index:65;width:.65em;height:.65em;border-radius:50%;background:var(--terra);pointer-events:none;transform:translate(-50%,-50%);display:none;align-items:center;justify-content:center;font-family:'Geist Mono',monospace;font-size:.68em;letter-spacing:.14em;color:#fff;text-transform:uppercase;transition:width .25s,height .25s,background-color .25s,border-color .25s;border:1.5px solid transparent}
+body.hero-active .hero-cursor{display:flex}
+.hero-cursor.is-link{width:3.1em;height:3.1em;background:transparent;border-color:var(--terra)}
+.hero-cursor.is-click{width:5.6em;height:5.6em;background:var(--terra)}
+body.on-hero .bar,body.on-hero .snd-wrap{opacity:0;pointer-events:none}
+.bar,.snd-wrap{transition:opacity .4s ease}
+@media(max-width:991px){
+  .hero{margin:.4em;border-radius:1.1em;height:calc(100svh - .8em)}
+  .hero-status{display:none}
+  .hero-nav{gap:1.4em;top:1.2em}
+  .hero-nav a{font-size:.8em}
+  .hero-nav .hn-logo{font-size:1.5em}
+  .hero-contact{top:auto;bottom:1.2em;right:1.2em}
+  .nl-1{font-size:6.4em;top:1.5em;left:.14em}
+  .nl-2{font-size:6.4em;top:3.05em;left:.55em}
+  .hero-portrait{height:33%;top:31%;bottom:auto;transform:translateX(-50%)}
+  .hero-left{left:1.4em;top:67%;max-width:19em}
+  .hero-head{font-size:1.5em}
+  .hero-para{display:none}
+  .hero-socials{left:1.4em;bottom:1.4em}
+  .hero-bake{display:none}
+  .hero-letter{display:none}
 }
 
 /* COURT — ref: --court-len 200vh, track sticky, vignette/lantern, caption */

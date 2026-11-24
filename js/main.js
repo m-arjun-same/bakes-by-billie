@@ -24,9 +24,12 @@ let lp=0, done=false;
 setTimeout(()=>$('#loaderSkip').classList.add('show'),1200);
 function finishLoader(){ if(done) return; done=true; loader.classList.add('done');
   document.documentElement.classList.remove('is-intro'); if(lenis) lenis.start();
-  gsap.from('.h1-t',{yPercent:46,opacity:0,stagger:.1,duration:1,ease:'power1.out',delay:.1});
-  gsap.from('.hero__copy',{y:30,opacity:0,duration:.8,delay:.7,ease:'power1.out'});
-  gsap.from('.hero__prod-card',{y:36,opacity:0,duration:.8,delay:.9,ease:'power1.out'});
+  gsap.from('.nl-1',{yPercent:38,opacity:0,duration:1,ease:'power1.out',delay:.1});
+  gsap.from('.nl-2',{yPercent:38,opacity:0,duration:1,ease:'power1.out',delay:.28});
+  gsap.from('.hero-portrait',{y:60,opacity:0,duration:1,ease:'power1.out',delay:.45});
+  gsap.from('.hero-left',{y:30,opacity:0,duration:.8,delay:.8,ease:'power1.out'});
+  gsap.from('.hero-bake',{y:30,opacity:0,duration:.8,delay:.95,ease:'power1.out'});
+  gsap.from('.hero-letter',{y:30,opacity:0,duration:.8,delay:1.1,ease:'power1.out'});
 }
 const pre=new Image(); pre.src='assets/img/hero.webp';
 const lt=setInterval(()=>{ lp=Math.min(100,lp+(pre.complete?7:2)+Math.random()*4);
@@ -39,10 +42,58 @@ $('#loaderSkip').addEventListener('click',finishLoader);
 ScrollTrigger.create({start:0,end:'max',onUpdate:st=>{ const b=$('#bar');
   b.style.transform=(st.direction===1 && st.scroll()>260)?'translateY(-135%)':'none'; }});
 
-/* HERO parallax */
-gsap.to('#heroImg',{scale:1.1,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:.5}});
-gsap.to('.hero-h1',{yPercent:-14,opacity:.3,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:.5}});
-gsap.to('.hero__prod-card',{y:-46,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:.5}});
+/* HERO — Elias template systems: on-hero chrome hide, lens cursor, bake cycle, letter */
+document.body.classList.add('on-hero','hero-active');
+ScrollTrigger.create({trigger:'#hero',start:'top bottom',end:'bottom top',
+  onToggle:st=>{ document.body.classList.toggle('on-hero',st.isActive);
+    document.body.classList.toggle('hero-active',st.isActive); }});
+$('#heroContact').addEventListener('click',()=>{ const q=$('#quote'); q.classList.add('open'); q.setAttribute('aria-hidden','false'); });
+/* lens cursor */
+const hCur=$('#heroCursor'), hCurTxt=$('#heroCursorTxt'), nameAlt=document.querySelector('.name-alt'), heroEl=$('#hero');
+let lensOn=false;
+heroEl.addEventListener('mousemove',e=>{ hCur.style.left=e.clientX+'px'; hCur.style.top=e.clientY+'px';
+  if(lensOn){ const r=heroEl.getBoundingClientRect();
+    nameAlt.style.clipPath=`circle(92px at ${e.clientX-r.left}px ${e.clientY-r.top}px)`; } });
+heroEl.addEventListener('mouseleave',()=>{ nameAlt.style.clipPath='circle(0px at -200px -200px)'; });
+function curState(el,state,txt){ el.addEventListener('mouseenter',()=>{ hCur.className='hero-cursor '+state; hCurTxt.textContent=txt||''; });
+  el.addEventListener('mouseleave',()=>{ hCur.className='hero-cursor'; hCurTxt.textContent=''; }); }
+$$('.hero a,.hero button').forEach(el=>{ if(el.id!=='bakeCard'&&el.id!=='bakeNext') curState(el,'is-link'); });
+$('#heroName').addEventListener('mouseenter',()=>{ lensOn=true; });
+$('#heroName').addEventListener('mouseleave',()=>{ lensOn=false; nameAlt.style.clipPath='circle(0px at -200px -200px)'; });
+/* latest-bake cycle (reference: book flips to next on click) */
+const BAKES=[
+ {img:'assets/img/postie.webp',title:'The<br>Postie<br>Box',label:'The Latest Bake',cats:'Boxes / Post / Sweet'},
+ {img:'assets/img/treatbox.webp',title:'Christmas<br>Eve<br>Box',label:'Also from the Shed',cats:'Seasonal / Christmas / £22'},
+ {img:'assets/img/choc-stack.webp',title:'Brownie<br>Stack<br>Box',label:'Also from the Shed',cats:'Treats / Brownies / Sharing'}];
+let bakeI=0, flipping=false;
+function nextBake(){ if(flipping) return; flipping=true; bakeI=(bakeI+1)%BAKES.length; const b=BAKES[bakeI];
+  gsap.to('#bakeCard',{rotateY:-88,duration:.38,ease:'power2.in',onComplete:()=>{
+    $('#bakeImg').src=b.img; $('#bakeCoverTitle').innerHTML=b.title;
+    $('#bakeLabel').textContent=b.label; $('#bakeCats').textContent=b.cats;
+    gsap.fromTo('#bakeCard',{rotateY:88},{rotateY:0,duration:.45,ease:'power2.out',onComplete:()=>flipping=false}); }}); }
+const bc=$('#bakeCard');
+bc.addEventListener('click',nextBake); $('#bakeNext').addEventListener('click',nextBake);
+curState(bc,'is-click','Click'); curState($('#bakeNext'),'is-click','Click');
+/* letter to tomorrow — typewriter, seal & send -> envelope, next letter */
+const LETTERS=[
+ 'I will put the kettle on and be at the shed before the brownies sell out.',
+ 'I will take the long walk to Wemyss Street and earn the last slice.',
+ 'I will order the birthday cake early — not the night before.',
+ 'I will bring my human to the shed. Murphy owes me a biscuit.'];
+let letterI=0, typeTimer=null;
+function typeLetter(){ const el=$('#letterText'); const full=LETTERS[letterI]; let n=0; el.textContent='';
+  $('#letterCount').textContent='Letter 0'+(letterI+1)+' / 04';
+  clearInterval(typeTimer);
+  typeTimer=setInterval(()=>{ n++; el.textContent=full.slice(0,n); if(n>=full.length) clearInterval(typeTimer); },34); }
+typeLetter();
+$('#letterSeal').addEventListener('click',()=>{ clearInterval(typeTimer);
+  $('#letterPaper').style.display='none'; const env=$('#letterEnv'); env.classList.add('show');
+  const d=new Date(); d.setDate(d.getDate()+((6-d.getDay()+7)%7||7));
+  const sat=d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'}).toUpperCase();
+  $('#envNote').textContent='Sealed for tomorrow · '+sat;
+  env.querySelector('.env-postmark').innerHTML='Tomorrow<br>'+sat;
+  setTimeout(()=>{ env.classList.remove('show'); $('#letterPaper').style.display='';
+    letterI=(letterI+1)%LETTERS.length; typeLetter(); },2600); });
 
 /* COURT — 39-frame logic adapted to 10 real bakes: frame = pow(p,.7)*9, lerp .22 */
 const frames=[]; for(let i=1;i<=10;i++){ const im=new Image(); im.src=`assets/img/j${i}.webp`; frames.push(im); }
