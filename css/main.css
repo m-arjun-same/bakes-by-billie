@@ -257,10 +257,6 @@ body.on-hero .bar,body.on-hero .snd-wrap{opacity:0;pointer-events:none}
 .rat__cta .btn:hover .btn-in{color:#fff}
 @media(max-width:767px){.rat{height:300vh;margin-top:-40vh}.rat__head h2{font-size:2.8em}.rat__pack{width:12.5em;height:12.5em}.rat__pack-tilt img{height:12.5em}.rat__pack--wht{left:2%;bottom:auto;top:27%}.rat__pack--blk{right:2%;bottom:auto;top:36%}}
 
-/* DUSK — ref: 100vh radial 135% 92% at 50% var(--ay), stops swapped to pink dusk */
-.dusk{position:relative;z-index:25;height:100vh;pointer-events:none;overflow:hidden;--ay:-12%;--suno:0;background:radial-gradient(135% 92% at 50% var(--ay),#F6EFE3 0%,#F7C8D8 30%,#FF8FBF 46%,#FF3E8A 62%,#57102E 76%,#0B0A08 88%)}
-.dusk-sun{position:absolute;left:50%;top:calc(16% + var(--suno,0%));transform:translateX(-50%);width:16em;height:16em;border-radius:50%;background:radial-gradient(circle,#FFF3D6,#FFD6A1 60%,rgba(255,214,161,0));opacity:.85}
-
 /* FOOTER — ref: .foot 88vh, content top -14vh centred, bar + legal */
 .foot{position:relative;z-index:25;height:88vh;background:var(--court-bg);overflow:hidden}
 .foot__media{position:absolute;inset:0}

@@ -178,11 +178,6 @@ fin.fromTo('.rat__pack--wht',{y:260},{y:0,ease:'none'},0)
    .fromTo('#ratCta',{y:170,opacity:0},{y:0,opacity:1,ease:'none'},.4)
    .fromTo('.rat__head',{yPercent:0,opacity:1},{yPercent:-26,opacity:.35,ease:'none'},0);
 
-/* DUSK — sun + gradient centre travel */
-ScrollTrigger.create({trigger:'#dusk',start:'top bottom',end:'bottom top',scrub:.5,
-  onUpdate:st=>{ const d=$('#dusk'); d.style.setProperty('--ay',(-12+st.progress*58)+'%');
-    d.style.setProperty('--suno',(st.progress*42)+'%'); }});
-
 /* HUD — 7 stops + scramble */
 const CH='#ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/<>[]*+=-';
 function scramble(el,to){ let n=0; const iv=setInterval(()=>{ n++;
