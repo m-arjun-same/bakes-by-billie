@@ -205,52 +205,19 @@ $('#quoteClose').addEventListener('click',()=>{ quote.classList.remove('open'); 
 function qText(){ return encodeURIComponent(`Hi Billie! I'm ${$('#qName').value||'...'}. I'd love: ${$('#qType').value} for ${$('#qDate').value||'a date TBC'}. ${$('#qMsg').value||''}`); }
 $('#qMail').addEventListener('click',e=>{ e.preventDefault(); location.href=`mailto:billie.king@sky.com?subject=Bakes by Billie enquiry&body=${qText()}`; });
 
-/* SOUND — warm lo-fi piano bed, generated live with WebAudio (no audio files).
-   Am7 → Fmaj7 → Cmaj7 → Gadd9 pads + soft bass + a sparse pentatonic melody
-   through a feedback delay. Slow, cosy, bakery-evening feel. */
-let actx=null, on=false, musicTimers=[], musicMaster=null;
-function tone(f,t,d,{type='sine',g=.04,attack=.01,partial=0,dest=null}={}){ const o=actx.createOscillator(), gn=actx.createGain();
-  o.type=type; o.frequency.value=f; const s=actx.currentTime+t;
-  gn.gain.setValueAtTime(0,s); gn.gain.linearRampToValueAtTime(g,s+attack);
-  gn.gain.exponentialRampToValueAtTime(.0001,s+d);
-  o.connect(gn).connect(dest||actx.destination); o.start(s); o.stop(s+d+.1);
-  if(partial) tone(f*2,t,d*.6,{type:'sine',g:g*partial,attack,dest}); }
-function startMusic(){ if(musicMaster) return; const master=actx.createGain(); master.gain.value=.55; musicMaster=master;
-  const comp=actx.createDynamicsCompressor(); master.connect(comp); comp.connect(actx.destination);
-  const delay=actx.createDelay(1); delay.delayTime.value=.42;
-  const fb=actx.createGain(); fb.gain.value=.34; const wet=actx.createGain(); wet.gain.value=.3;
-  delay.connect(fb); fb.connect(delay); delay.connect(wet); wet.connect(master);
-  const chords=[[110,164.81,196,261.63],[87.31,130.81,164.81,220],[130.81,196,246.94,329.63],[98,146.83,220,246.94]];
-  const roots=[55,43.65,65.41,49];
-  const CH=4.4; let ci=0;
-  const playChord=()=>{ if(!on) return; const c=chords[ci%4];
-    c.forEach(f=>tone(f,0,CH+1.6,{type:'triangle',g:.011,attack:1.3,dest:master}));
-    tone(roots[ci%4],0,3.6,{type:'sine',g:.05,attack:.02,dest:master});
-    ci++; musicTimers.push(setTimeout(playChord,CH*1000)); };
-  const scale=[440,523.25,587.33,659.25,783.99,880]; let mi=2;
-  const playMelody=()=>{ if(!on) return; mi=Math.max(0,Math.min(scale.length-1,mi+(Math.random()<.5?-1:1)*(Math.random()<.3?2:1)));
-    if(Math.random()<.82) tone(scale[mi],0,1.9,{type:'sine',g:.032,attack:.005,partial:.35,dest:delay});
-    tone(scale[mi],0,1.9,{type:'sine',g:.02,attack:.005,dest:master});
-    musicTimers.push(setTimeout(playMelody,700+Math.random()*1100)); };
-  playChord(); musicTimers.push(setTimeout(playMelody,900)); }
-const sndBtn=$('#snd');
+/* SOUND — Buddy's track (assets/audio/music.mp3), looped.
+   Autoplay: browsers only unlock audio after a first gesture, so playback
+   starts on the first tap/click/keypress — unless sound was turned off. */
+const bgm=$('#bgm'); bgm.volume=.5;
+const sndBtn=$('#snd'); let on=false;
 function setSound(want){ on=want; sndBtn.classList.toggle('on',on); sndBtn.setAttribute('aria-pressed',on);
   localStorage.setItem('billie-sound',on?'1':'0');
-  if(on){ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
-    if(actx.state==='suspended') actx.resume(); startMusic(); }
-  else { musicTimers.forEach(clearTimeout); musicTimers=[];
-    if(musicMaster){ const m=musicMaster; musicMaster=null;
-      m.gain.linearRampToValueAtTime(.0001,actx.currentTime+.4); setTimeout(()=>m.disconnect(),500); } } }
+  if(on){ const p=bgm.play(); if(p) p.catch(()=>{}); } else bgm.pause(); }
 sndBtn.addEventListener('click',()=>setSound(!on));
-/* Autoplay: browsers only unlock audio after a first gesture, so start the
-   moment the visitor first taps, clicks or presses a key — unless they
-   previously turned sound off. */
-if(localStorage.getItem('billie-sound')!=='0'){ const arm=()=>{ setSound(true); };
-  const tryNow=()=>{ if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
-    if(actx.state==='running'){ arm(); } };
-  tryNow();
-  ['pointerdown','keydown','touchstart'].forEach(ev=>window.addEventListener(ev,function h(){ if(!on) arm();
-    if(on) ['pointerdown','keydown','touchstart'].forEach(e2=>window.removeEventListener(e2,h)); },{passive:true})); }
+if(localStorage.getItem('billie-sound')!=='0'){ const p=bgm.play();
+  if(p) p.then(()=>setSound(true)).catch(()=>{ const h=()=>{ setSound(true);
+      ['pointerdown','keydown','touchstart'].forEach(e2=>window.removeEventListener(e2,h)); };
+    ['pointerdown','keydown','touchstart'].forEach(ev=>window.addEventListener(ev,h,{passive:true})); }); }
 
 /* Pause motion */
 let paused=false;
