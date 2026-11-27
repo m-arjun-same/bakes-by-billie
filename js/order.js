@@ -2,7 +2,7 @@
 (function(){
 "use strict";
 const $=s=>document.querySelector(s);
-const state={bake:'Custom cake',flavour:'Triple Chocolate',colour:'#5A3220',name:'',size:'8" — serves ~20',collect:'Cake Shed — 57 Wemyss Street, Rosyth',date:''};
+const state={bake:'Custom cake',flavour:'Triple Chocolate',colour:'#5A3220',name:'',size:'8" — serves ~20',collect:'Bake Shed — 12 Honey Lane, Willowfield',date:''};
 function pick(id,key,cb){ const box=$(id); box.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return;
   box.querySelectorAll('button').forEach(x=>x.classList.remove('on')); b.classList.add('on'); state[key]=b.dataset.v; if(cb) cb(b); render(); }); }
 pick('#optBake','bake'); pick('#optSize','size'); pick('#optCollect','collect');
@@ -28,9 +28,9 @@ function render(){
   }
   const lines=[`BAKE — ${state.bake}`,`FLAVOUR — ${state.flavour}`,state.name?`ICED — ${state.name} (${initials(state.name)})`:null,
     `SIZE — ${state.size}`,`COLLECT — ${state.collect}`,state.date?`DATE — ${state.date}`:'DATE — to confirm',
-    `PRICE — confirmed by Billie on enquiry`].filter(Boolean);
+    `PRICE — confirmed by Wren on enquiry`].filter(Boolean);
   $('#kitSummary').textContent=lines.join('\n');
-  $('#kitSend').href=`mailto:billie.king@sky.com?subject=Bakes by Billie order&body=${encodeURIComponent('Hi Billie! My order:\n'+lines.join('\n'))}`;
+  $('#kitSend').href=`mailto:hello@whiskandwren.com?subject=Whisk & Wren order&body=${encodeURIComponent('Hi Wren! My order:\n'+lines.join('\n'))}`;
 }
 render();
 })();

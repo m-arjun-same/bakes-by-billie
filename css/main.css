@@ -2,7 +2,7 @@
 @font-face{font-family:'Geist';src:url('../assets/fonts/Geist-Variable.woff2') format('woff2');font-weight:100 900}
 @font-face{font-family:'Geist Mono';src:url('../assets/fonts/GeistMono-Variable.woff2') format('woff2');font-weight:100 900}
 @font-face{font-family:'Caveat';src:url('../assets/fonts/Caveat-Variable-latin.woff2') format('woff2');font-weight:400 700}
-/* Tokens + fluid system: reference values (Infinity dossier), accent swapped to Cake Coven pink */
+/* Tokens + fluid system: reference values (Infinity dossier), accent swapped to Bake Club pink */
 :root{
   --scene-bg:#161310; --court-bg:#0B0A08; --court-bg-2:#12100D; --ink:#211A12;
   --sand:#EDE4D2; --cream:#F6F0E2; --terra:#FF3E8A; --terra-hover:#E02B74;

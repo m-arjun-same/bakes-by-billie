@@ -1,4 +1,4 @@
-/* Bakes by Billie — own code, reference-exact UI system (Infinity structure/values).
+/* Whisk & Wren — own code, reference-exact UI system (Infinity structure/values).
    Lenis lerp .09 + GSAP ticker, loader, hero, court track, qq pinned quarters,
    knit name tool, ttl cards+cursor, rat finale, dusk, HUD scramble, quote, sound. */
 (function(){
@@ -62,8 +62,8 @@ $('#heroName').addEventListener('mouseenter',()=>{ lensOn=true; });
 $('#heroName').addEventListener('mouseleave',()=>{ lensOn=false; nameAlt.style.clipPath='circle(0px at -200px -200px)'; });
 /* latest-bake cycle (reference: book flips to next on click) */
 const BAKES=[
- {img:'assets/img/postie.webp',title:'The<br>Postie<br>Box',label:'The Latest Bake',cats:'Boxes / Post / Sweet'},
- {img:'assets/img/treatbox.webp',title:'Christmas<br>Eve<br>Box',label:'Also from the Shed',cats:'Seasonal / Christmas / £22'},
+ {img:'assets/img/postie.webp',title:'The<br>Parcel<br>Box',label:'The Latest Bake',cats:'Boxes / Post / Sweet'},
+ {img:'assets/img/treatbox.webp',title:'Winter<br>Eve<br>Box',label:'Also from the Shed',cats:'Seasonal / Christmas / £22'},
  {img:'assets/img/choc-stack.webp',title:'Brownie<br>Stack<br>Box',label:'Also from the Shed',cats:'Treats / Brownies / Sharing'}];
 let bakeI=0, flipping=false;
 function nextBake(){ if(flipping) return; flipping=true; bakeI=(bakeI+1)%BAKES.length; const b=BAKES[bakeI];
@@ -77,9 +77,9 @@ curState(bc,'is-click','Click'); curState($('#bakeNext'),'is-click','Click');
 /* letter to tomorrow — typewriter, seal & send -> envelope, next letter */
 const LETTERS=[
  'I will put the kettle on and be at the shed before the brownies sell out.',
- 'I will take the long walk to Wemyss Street and earn the last slice.',
+ 'I will take the long walk to Honey Lane and earn the last slice.',
  'I will order the birthday cake early — not the night before.',
- 'I will bring my human to the shed. Murphy owes me a biscuit.'];
+ 'I will bring my human to the shed. Milo owes me a biscuit.'];
 let letterI=0, typeTimer=null;
 function typeLetter(){ const el=$('#letterText'); const full=LETTERS[letterI]; let n=0; el.textContent='';
   $('#letterCount').textContent='Letter 0'+(letterI+1)+' / 04';
@@ -158,8 +158,8 @@ const cur=$('#ttlCursor'), ttl=$('#testimonials');
 ttl.addEventListener('mousemove',e=>{ cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px'; });
 $$('.ttl__card').forEach(c=>{ c.addEventListener('mouseenter',()=>cur.classList.add('show'));
   c.addEventListener('mouseleave',()=>cur.classList.remove('show')); });
-const LB={ billie:{img:'assets/img/billie.webp',cap:'Billie — one person behind the mixing bowl, back at the sheds from 27 November.'},
-  murphy:{img:'assets/img/murphy.webp',cap:"Murphy — Club President. Free homemade biscuit for every dog who brings their human to the Rosyth shed."} };
+const LB={ wren:{img:'assets/img/billie.webp',cap:'Wren — one person behind the mixing bowl, back at the sheds this weekend.'},
+  milo:{img:'assets/img/murphy.webp',cap:"Milo — Club President. Free homemade biscuit for every dog who brings their human to the Willowfield shed."} };
 const lb=$('#lb');
 function openLb(k){ const d=LB[k]; if(!d) return; $('#lbImg').src=d.img; $('#lbCap').textContent=d.cap;
   lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); if(lenis) lenis.stop();
@@ -183,7 +183,7 @@ const CH='#ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/<>[]*+=-';
 function scramble(el,to){ let n=0; const iv=setInterval(()=>{ n++;
   el.textContent=to.split('').map((c,i)=> i<n? c : CH[Math.floor(Math.random()*CH.length)]).join('');
   if(n>=to.length) clearInterval(iv); },34); }
-const STOPS=[['hero','TIP-OFF'],['court','IN THE KITCHEN'],['tech','THE BAKES'],['team','ICED FOR YOU'],['testimonials','WORD FROM THE COVEN'],['finale','GET READY'],['foot','FINAL WHISTLE']];
+const STOPS=[['hero','TIP-OFF'],['court','IN THE KITCHEN'],['tech','THE BAKES'],['team','ICED FOR YOU'],['testimonials','WORD FROM THE CLUB'],['finale','GET READY'],['foot','FINAL WHISTLE']];
 let curStop='';
 STOPS.forEach(([id,name],idx)=>{ ScrollTrigger.create({trigger:'#'+id,start:'top 55%',end:'bottom 55%',
   onToggle:st=>{ if(st.isActive && curStop!==id){ curStop=id;
@@ -202,8 +202,8 @@ $('#hudNext').addEventListener('click',()=>{ const i=STOPS.findIndex(s=>s[0]===c
 const quote=$('#quote');
 $('#quoteOpen').addEventListener('click',()=>{ quote.classList.add('open'); quote.setAttribute('aria-hidden','false'); });
 $('#quoteClose').addEventListener('click',()=>{ quote.classList.remove('open'); quote.setAttribute('aria-hidden','true'); });
-function qText(){ return encodeURIComponent(`Hi Billie! I'm ${$('#qName').value||'...'}. I'd love: ${$('#qType').value} for ${$('#qDate').value||'a date TBC'}. ${$('#qMsg').value||''}`); }
-$('#qMail').addEventListener('click',e=>{ e.preventDefault(); location.href=`mailto:billie.king@sky.com?subject=Bakes by Billie enquiry&body=${qText()}`; });
+function qText(){ return encodeURIComponent(`Hi Wren! I'm ${$('#qName').value||'...'}. I'd love: ${$('#qType').value} for ${$('#qDate').value||'a date TBC'}. ${$('#qMsg').value||''}`); }
+$('#qMail').addEventListener('click',e=>{ e.preventDefault(); location.href=`mailto:hello@whiskandwren.com?subject=Whisk & Wren enquiry&body=${qText()}`; });
 
 /* SOUND — Buddy's track (assets/audio/music.mp3), looped.
    Autoplay: browsers only unlock audio after a first gesture, so playback
@@ -211,10 +211,10 @@ $('#qMail').addEventListener('click',e=>{ e.preventDefault(); location.href=`mai
 const bgm=$('#bgm'); bgm.volume=.5;
 const sndBtn=$('#snd'); let on=false;
 function setSound(want){ on=want; sndBtn.classList.toggle('on',on); sndBtn.setAttribute('aria-pressed',on);
-  localStorage.setItem('billie-sound',on?'1':'0');
+  localStorage.setItem('wren-sound',on?'1':'0');
   if(on){ const p=bgm.play(); if(p) p.catch(()=>{}); } else bgm.pause(); }
 sndBtn.addEventListener('click',()=>setSound(!on));
-if(localStorage.getItem('billie-sound')!=='0'){ const p=bgm.play();
+if(localStorage.getItem('wren-sound')!=='0'){ const p=bgm.play();
   if(p) p.then(()=>setSound(true)).catch(()=>{ const h=()=>{ setSound(true);
       ['pointerdown','keydown','touchstart'].forEach(e2=>window.removeEventListener(e2,h)); };
     ['pointerdown','keydown','touchstart'].forEach(ev=>window.addEventListener(ev,h,{passive:true})); }); }
