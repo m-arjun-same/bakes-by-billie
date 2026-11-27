@@ -259,19 +259,20 @@ body.on-hero .bar{opacity:0;pointer-events:none}
 @media(max-width:767px){.rat{height:300vh;margin-top:-40vh}.rat__head h2{font-size:2.8em}.rat__pack{width:12.5em;height:12.5em}.rat__pack-tilt img{height:12.5em}.rat__pack--wht{left:2%;bottom:auto;top:27%}.rat__pack--blk{right:2%;bottom:auto;top:36%}}
 
 /* FOOTER — ref: .foot 88vh, content top -14vh centred, bar + legal */
-.foot{position:relative;z-index:25;height:88vh;background:var(--court-bg);overflow:hidden}
+.foot{position:relative;z-index:25;height:88vh;background:var(--cream);color:var(--ink);overflow:hidden}
 .foot__media{position:absolute;inset:0}
-.foot__media img{width:100%;height:100%;object-fit:cover;opacity:.42}
-.foot-grain{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,10,8,.25),rgba(11,10,8,.9))}
+.foot__media img{width:100%;height:100%;object-fit:cover;opacity:.12}
+.foot-grain{position:absolute;inset:0;background:linear-gradient(180deg,rgba(246,240,226,.35),rgba(246,240,226,.88))}
 .foot__content{position:absolute;top:-14vh;left:0;right:0;bottom:0;z-index:4;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;padding:16vh 2em 0;pointer-events:none}
-.foot-tag{font-family:'FK Screamer',Impact,sans-serif;font-size:4.8em;text-transform:uppercase;line-height:.95}
-.foot-line{font-weight:300;font-size:1.15em;margin-top:.8em;color:var(--white-soft)}
-.foot__bar{position:absolute;left:3em;right:3em;bottom:4.4em;z-index:5;display:flex;gap:2.2em;flex-wrap:wrap;align-items:center;font-family:'Geist Mono',monospace;font-size:.82em;letter-spacing:.1em}
+.foot-tag{font-family:'FK Screamer',Impact,sans-serif;font-size:4.8em;text-transform:uppercase;line-height:.95;color:var(--ink)}
+.foot-line{font-weight:300;font-size:1.15em;margin-top:.8em;color:rgba(33,26,18,.72)}
+.foot-wordmark{font-family:'FK Screamer',Impact,sans-serif;font-size:7em;text-transform:uppercase;line-height:.9;color:var(--ink);opacity:.09;margin-top:.4em;white-space:nowrap}
+.foot__bar{position:absolute;left:3em;right:3em;bottom:4.4em;z-index:5;display:flex;gap:2.2em;flex-wrap:wrap;align-items:center;font-family:'Geist Mono',monospace;font-size:.82em;letter-spacing:.1em;color:var(--ink)}
 .foot__bar a{text-decoration:none;border-bottom:1px solid var(--terra)}
-.foot-pause{background:none;border:none;color:var(--sand);text-decoration:underline;cursor:pointer;font:inherit;margin-left:auto}
-.foot__legal{position:absolute;left:3em;right:3em;bottom:1.8em;z-index:5;display:flex;gap:1.8em;flex-wrap:wrap;border-top:1px solid var(--hairline);padding-top:1.2em;font-size:.88em;color:var(--white-dim)}
+.foot-pause{background:none;border:none;color:var(--ink);text-decoration:underline;cursor:pointer;font:inherit;margin-left:auto}
+.foot__legal{position:absolute;left:3em;right:3em;bottom:1.8em;z-index:5;display:flex;gap:1.8em;flex-wrap:wrap;border-top:1px solid var(--line-strong);padding-top:1.2em;font-size:.88em;color:rgba(33,26,18,.6)}
 .foot__legal a{text-decoration:none}
-@media(max-width:767px){.foot-tag{font-size:2.7em}.foot__bar,.foot__legal{left:1.4em;right:1.4em}}
+@media(max-width:767px){.foot-tag{font-size:2.7em}.foot-wordmark{font-size:3.4em}.foot__bar,.foot__legal{left:1.4em;right:1.4em}}
 
 /* QUOTE DRAWER — ref: width min(27.5em,92vw), push .7s ease */
 .quote{position:fixed;top:0;right:0;bottom:0;width:min(27.5em,92vw);background:var(--cream);color:var(--ink);z-index:58;padding:3em 2.4em;transform:translateX(105%);transition:transform .7s var(--ease-default);overflow-y:auto}
