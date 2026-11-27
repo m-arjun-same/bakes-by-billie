@@ -6,9 +6,13 @@
 <title>Whisk & Wren — The Bake Club | Homemade Cakes, Willowfield</title>
 <meta name="description" content="Whisk & Wren — The Bake Club. Homemade custom cakes, cupcakes, cake pops and treat boxes from Willowfield. Bake Sheds at 12 Honey Lane and Riverside Market.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧁</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <!-- LOADER (reference: .loader / .loader__blocks / .loader__ui) -->
 <div class="loader" id="loader" aria-hidden="true">
@@ -125,6 +129,11 @@
     <div class="hero-cursor" id="heroCursor"><span id="heroCursorTxt"></span></div>
   </section>
 
+<div class="marquee" aria-hidden="true"><div class="marquee-track">
+<div class="marquee-group"><span>Fresh from the oven</span><i>•</i><span>Custom cakes</span><i>•</i><span>Cupcakes &amp; cake pops</span><i>•</i><span>Parcel boxes</span><i>•</i><span>Bake Shed Saturdays</span><i>•</i></div>
+<div class="marquee-group"><span>Fresh from the oven</span><i>•</i><span>Custom cakes</span><i>•</i><span>Cupcakes &amp; cake pops</span><i>•</i><span>Parcel boxes</span><i>•</i><span>Bake Shed Saturdays</span><i>•</i></div>
+</div></div>
+
   <!-- COURT (reference: .court --court-len 200vh, track / vignette / lantern / caption) -->
   <section class="court" id="court">
     <div class="court__track">
@@ -140,6 +149,7 @@
         <figure class="hcard" style="--i:5"><img src="assets/img/treatbox.webp" alt="Treat box"></figure>
         <figure class="hcard" style="--i:6"><img src="assets/img/shed-in.webp" alt="Inside the Bake Shed"></figure>
       </div>
+      <p class="court-statement" id="courtStatement">Baked at dawn.<br>Gone by Sunday.</p>
       <p class="court-caption">Trusted every celebration.</p>
     </div>
   </section>
@@ -198,7 +208,6 @@
   <!-- TEAM (reference: #team / #knit pinned two-view scene + name tool) -->
   <section class="team" id="team">
     <div class="knit" id="knit">
-      <img class="knit-bg" src="assets/img/shed-shelf.webp" alt="">
       <div class="knit-stage">
         <canvas id="icedCanvas" width="1080" height="1080" aria-label="Cake with your name iced on it"></canvas>
         <div class="knit-card" id="knitCard">
@@ -215,7 +224,7 @@
   <!-- TESTIMONIALS (reference: .ttl wall/stage, 2 film cards, quote slots, ttl-cursor) -->
   <section class="ttl" id="testimonials">
     <div class="ttl__wall">
-      <h2 class="ttl-h">Word from the Club.</h2>
+      <h2 class="ttl-h" data-wipe>Word from the Club.</h2>
       <div class="ttl__stage">
         <article class="ttl__card" data-lb="wren">
           <div class="ttl__frame">
@@ -253,7 +262,7 @@
     <div class="rat__stage">
       <div class="rat__head">
         <span>Season 26/27 — Christmas at the Bake Club</span>
-        <h2>Get ready.</h2>
+        <h2 data-wipe>Get ready.</h2>
       </div>
       <div class="rat__packs">
         <div class="rat__pack rat__pack--wht">
@@ -282,9 +291,8 @@
 
 <!-- FOOTER (reference: .foot 88vh, media / content / bar / legal) -->
 <footer class="foot" id="foot">
-  <div class="foot__media"><img src="assets/img/shed.webp" alt=""><div class="foot-grain"></div></div>
   <div class="foot__content">
-    <p class="foot-tag">Baked fresh. Gone fast.</p>
+    <p class="foot-tag" data-wipe>Baked fresh. Gone fast.</p>
     <p class="foot-line">Baked with love in Willowfield — Whisk & Wren · The Bake Club</p>
     <p class="foot-line">Bake Shed: 12 Honey Lane, Willowfield · Riverside Market, Willowfield</p>
     <p class="foot-line">Sat &amp; Sun, 10am–8pm or sell-out · Christmas orders close 20 December</p>

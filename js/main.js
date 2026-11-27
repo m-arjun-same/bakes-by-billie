@@ -227,5 +227,30 @@ $('#pauseMotion').addEventListener('click',function(){ paused=!paused;
   else{ if(lenis) lenis.start(); gsap.globalTimeline.resume(); } });
 
 $$('.ttl__card,.ttl__quote-slot').forEach(el=>gsap.from(el,{y:44,opacity:0,duration:.9,ease:'power1.out',scrollTrigger:{trigger:el,start:'top 90%'}}));
+
+/* LIGHT THEME MOTION — own code (library ideas: scroll-5 drifting photos + statement, text word-wipe) */
+if(!reduced){
+  /* scroll progress bar */
+  const prog=$('#progress');
+  if(prog) gsap.to(prog,{scaleX:1,ease:'none',scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:.3}});
+  /* hero parallax */
+  gsap.to('.hero-name',{yPercent:-14,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('.hero-portrait',{yPercent:10,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+  /* court statement: drifts in and out with the scroll (scroll-5) */
+  const cs=$('#courtStatement');
+  if(cs){ const csTl=gsap.timeline({scrollTrigger:{trigger:'#court',start:'top bottom',end:'bottom top',scrub:.6}});
+    csTl.fromTo(cs,{y:80,opacity:0},{y:0,opacity:1,duration:.35,ease:'none'})
+        .to(cs,{y:-80,opacity:0,duration:.35,ease:'none'},.65); }
+  /* word-wipe headings */
+  $$('[data-wipe]').forEach(el=>{
+    const words=el.textContent.trim().split(/\s+/);
+    el.innerHTML=words.map(w=>`<span class="w"><span class="wi">${w}</span></span>`).join(' ');
+    gsap.fromTo(el.querySelectorAll('.wi'),{yPercent:110},{yPercent:0,duration:.9,ease:'power3.out',stagger:.06,
+      scrollTrigger:{trigger:el,start:'top 88%',once:true}}); });
+  /* footer reveal */
+  gsap.from('.foot-line, .foot-wordmark',{y:32,opacity:0,duration:.9,ease:'power2.out',stagger:.09,
+    scrollTrigger:{trigger:'#foot',start:'top 78%',once:true}});
+}
+
 window.addEventListener('load',()=>ScrollTrigger.refresh());
 })();
