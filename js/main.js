@@ -192,6 +192,9 @@ STOPS.forEach(([id,name],idx)=>{ ScrollTrigger.create({trigger:'#'+id,start:'top
     $('#hudClock').textContent=String(24-idx*3).padStart(2,'0');
     $('#hudCount').textContent='0'+(idx+1)+' / 07'; } }}); });
 $$('.hud-stops li').forEach(li=>li.addEventListener('click',()=>scrollToEl($('#'+li.dataset.stop))));
+/* Sound toggle hides where it would cover text: on the hero and over the footer */
+ScrollTrigger.create({trigger:'#foot',start:'top 85%',end:'bottom top',
+  onToggle:st=>document.body.classList.toggle('on-foot',st.isActive)});
 /* HUD box appears after the hero (reference: absent on hero, present from court on) */
 ScrollTrigger.create({trigger:'#court',start:'top 85%',
   onEnter:()=>$('#hud').classList.add('show'), onLeaveBack:()=>$('#hud').classList.remove('show')});
