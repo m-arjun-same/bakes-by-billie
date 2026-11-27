@@ -158,14 +158,13 @@ body.on-hero .snd-wrap,body.on-foot .snd-wrap{opacity:0;pointer-events:none}
 /* COURT — ref: --court-len 200vh, track sticky, vignette/lantern, caption */
 .court{position:relative;--court-len:200vh;height:var(--court-len);background:var(--court-bg)}
 .court__track{position:sticky;top:0;height:100svh;overflow:hidden}
-#journeyCanvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
 .court-vignette{display:none}
 .court-lantern{display:none}
-.helix{position:absolute;left:50%;top:50%;width:1px;height:1px;transform-style:preserve-3d;perspective:900px;z-index:2}
-.hcard{position:absolute;left:-8em;top:-10.5em;width:16em;height:21em;border-radius:1em;overflow:hidden;border:1px solid var(--hairline);transform:rotateY(calc(var(--i)*51.4deg)) translateZ(29em);backface-visibility:hidden}
+.helix{position:absolute;left:50%;top:50%;width:1px;height:1px;transform-style:preserve-3d;perspective:900px;transform:rotateX(-4deg);z-index:2}
+.hcard{position:absolute;left:-8em;top:-10.5em;width:16em;height:21em;border-radius:1em;overflow:hidden;border:1px solid var(--hairline);transform:translateX(calc((var(--i) - 3)*11em)) rotateY(calc((var(--i) - 3)*-14deg));box-shadow:0 24px 48px rgba(33,26,18,.18);will-change:transform,opacity}
 .hcard img{width:100%;height:100%;object-fit:cover}
-.court-caption{position:absolute;bottom:9%;left:0;right:0;text-align:center;font-family:'Fraunces',Georgia,serif;font-size:4.2em;text-transform:uppercase;z-index:3;color:var(--ink)}
-@media(max-width:767px){.court{--court-len:170vh}.hcard{left:-6em;top:-8.5em;width:12em;height:17em;transform:rotateY(calc(var(--i)*51.4deg)) translateZ(21em)}.court-caption{font-size:2.3em}}
+.court-caption{position:absolute;bottom:13%;left:0;right:0;text-align:center;font-family:'Fraunces',Georgia,serif;font-size:3.6em;text-transform:uppercase;z-index:3;color:var(--ink)}
+@media(max-width:767px){.court{--court-len:170vh}.hcard{left:-6em;top:-8.5em;width:12em;height:17em;transform:translateX(calc((var(--i) - 3)*6.5em)) rotateY(calc((var(--i) - 3)*-14deg))}.court-caption{font-size:2.3em}}
 
 /* TECH — reference layout: left stacked title + mono lead, right portrait card,
    panels wipe INSIDE the card, HUD inside card bottom (cat + count / title / desc) */

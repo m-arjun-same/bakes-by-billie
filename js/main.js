@@ -95,18 +95,23 @@ $('#letterSeal').addEventListener('click',()=>{ clearInterval(typeTimer);
   setTimeout(()=>{ env.classList.remove('show'); $('#letterPaper').style.display='';
     letterI=(letterI+1)%LETTERS.length; typeLetter(); },2600); });
 
-/* COURT — 39-frame logic adapted to 10 real bakes: frame = pow(p,.7)*9, lerp .22 */
-const frames=[]; for(let i=1;i<=10;i++){ const im=new Image(); im.src=`assets/img/j${i}.webp`; frames.push(im); }
-const cv=$('#journeyCanvas'), cx=cv.getContext('2d');
-let curF=-1, dispF=0;
-function drawFrame(f){ f=Math.max(0,Math.min(9,Math.round(f))); if(f===curF) return;
-  const im=frames[f]; if(!im||!im.complete) return; curF=f;
-  const s=Math.max(cv.width/im.width,cv.height/im.height), w=im.width*s, h=im.height*s;
-  cx.clearRect(0,0,cv.width,cv.height); cx.drawImage(im,(cv.width-w)/2,(cv.height-h)/2,w,h); }
-const helix=$('#helix');
+/* COURT — coverflow: scroll scrubs the active card to centre, neighbours fan out on an arc.
+   No background image any more — flat ground, the cards are the picture. */
+const cards=$$('.hcard');
+function layoutCards(p){
+  const gap=innerWidth<768?6.5:11, active=p*(cards.length-1);
+  cards.forEach((c,i)=>{
+    const d=i-active, ad=Math.abs(d);
+    const x=d*gap, z=-ad*7, r=d*-14, s=Math.max(.55,1-ad*.09);
+    const o=ad>2.5?Math.max(0,1-(ad-2.5)*.8):1;
+    c.style.transform=`translateX(${x}em) translateZ(${z}em) rotateY(${r}deg) scale(${s})`;
+    c.style.opacity=o;
+    c.style.zIndex=100-Math.round(ad*10);
+  });
+}
 ScrollTrigger.create({trigger:'#court',start:'top top',end:'bottom bottom',scrub:.6,
-  onUpdate:st=>{ const target=(st.progress**0.7)*9; dispF+=(target-dispF)*0.22; drawFrame(dispF);
-    if(helix) helix.style.transform=`rotateX(-8deg) rotateY(${st.progress*300}deg)`; }});
+  onUpdate:st=>layoutCards(st.progress)});
+layoutCards(0);
 
 /* TRX rows at qq boundary */
 const trx=$('#trx'); for(let i=0;i<14;i++) trx.appendChild(document.createElement('i'));
